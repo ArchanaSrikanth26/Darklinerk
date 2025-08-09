@@ -1,28 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import image2 from '../assets/images/road2.jpg';
+import image3 from '../assets/images/road3.jpg';
+import image5 from '../assets/images/road5.jpeg';
 import image1 from '../assets/images/img1.jpg';
-import image2 from '../assets/images/img2.jpg';
-import image3 from '../assets/images/img3.jpg';
 
 const Carousel = () => {
   const slides = [
     {
       id: 1,
-      image: image1,
+      image: image2,
       title: 'The Best',
       subtitle: 'Agriculture Products',
       description: 'Spices, Sugar, Food Grains, Tea, Pulses, Agro Feeds.',
     },
     {
       id: 2,
-      image: image2,
+      image: image3,
       title: 'Fresh & Organic',
       subtitle: 'From Farm to Table',
       description: 'Natural & Healthy Food Grains and Spices.',
     },
     {
       id: 3,
-      image: image3,
+      image: image5,
+      title: 'Premium Quality',
+      subtitle: 'Exports Across The Globe',
+      description: 'Delivering trust with quality products.',
+    },
+    {
+      id: 4,
+      image: image1,
+      title: 'Premium Quality',
+      subtitle: 'Exports Across The Globe',
+      description: 'Delivering trust with quality products.',
+    },
+    {
+      id: 5,
+      image: image5,
       title: 'Premium Quality',
       subtitle: 'Exports Across The Globe',
       description: 'Delivering trust with quality products.',
@@ -43,7 +58,7 @@ const Carousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 7000); // Auto-slide every 7 seconds
+    }, 3000); // Auto-slide every 7 seconds
     return () => clearInterval(interval);
   }, [current]);
 
