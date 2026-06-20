@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-
+import React, { useState, useEffect, useRef } from 'react';
 import AboutImage from '../assets/images/abtimg.jpg';
 import missionImg from '../assets/images/abt2.jpg';
-import statsImage from '../assets/images/abt2.jpg';
 
 const statsData = [
   { label: 'MT/Year Material Exported', endValue: 500000, suffix: '+', duration: 2000 },
@@ -13,159 +9,160 @@ const statsData = [
   { label: 'Supply Locations PAN India', endValue: 50, suffix: '+', duration: 1500 },
 ];
 
-const Counter = ({ endValue, duration, suffix, trigger }) => {
+const useCountUp = (endValue, duration, trigger) => {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     if (!trigger) return;
     let start = 0;
     const increment = endValue / (duration / 16);
     const timer = setInterval(() => {
       start += increment;
-      if (start >= endValue) {
-        start = endValue;
-        clearInterval(timer);
-      }
+      if (start >= endValue) { start = endValue; clearInterval(timer); }
       setCount(Math.floor(start));
     }, 16);
     return () => clearInterval(timer);
   }, [trigger, endValue, duration]);
-
-  return (
-    <span className="text-5xl font-extrabold text-yellow-500 drop-shadow-sm">
-      {count.toLocaleString()}{suffix}
-    </span>
-  );
+  return count;
 };
 
-const StatsSection = () => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.4 });
-
+const StatCard = ({ label, endValue, suffix, duration, trigger }) => {
+  const count = useCountUp(endValue, duration, trigger);
   return (
-    <div
-      ref={ref}
-      className="bg-gradient-to-r from-yellow-50 to-white py-20 px-4 md:px-12"
-    >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        <img
-          src={statsImage}
-          alt="Company Stats"
-          className="md:w-1/2 w-full rounded-2xl shadow-2xl object-cover"
-        />
-
-        <div className="md:w-1/2 w-full">
-          <h2 className="text-4xl font-bold text-gray-800 mb-10">
-            UMA Exports in Numbers
-          </h2>
-          <div className="grid grid-cols-2 gap-6">
-            {statsData.map((stat, idx) => (
-              <div
-                key={idx}
-                className="bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition"
-              >
-                <Counter
-                  endValue={stat.endValue}
-                  duration={stat.duration}
-                  suffix={stat.suffix}
-                  trigger={inView}
-                />
-                <p className="mt-3 text-sm text-gray-700">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col items-center justify-center bg-white border border-gray-200 rounded-2xl p-8 hover:border-yellow-400 hover:shadow-md transition-all duration-300">
+      <span className="text-4xl font-extrabold text-yellow-500">{count.toLocaleString()}{suffix}</span>
+      <p className="mt-3 text-sm text-gray-500 text-center font-medium uppercase tracking-wide">{label}</p>
     </div>
   );
 };
 
+const tabs = [
+  { key: 'mission', title: 'Our Mission', icon: '🎯', content: 'At Dark Lines RK Pvt. Ltd., our mission is to be the leading provider of premium-grade bitumen and construction materials, offering efficient solutions tailored to meet the infrastructure needs of growing economies. We ensure timely deliveries, unmatched quality, and sustainable practices that empower progress across India and beyond.' },
+  { key: 'vision', title: 'Our Vision', icon: '🌐', content: 'Our vision is to build a future where reliable supply chains support the growth of modern infrastructure. We aim to be recognized across India and globally for our integrity, innovation, and lasting impact on roads, buildings, and civil infrastructure.' },
+  { key: 'team', title: 'Our Team', icon: '🤝', content: 'Led by Director Manikandanraj, our team of civil engineers, logistics experts, and trade specialists bring deep expertise across bitumen supply, agricultural commodities, interior works, and civil construction. We are committed to delivering quality and building long-term partnerships.' },
+];
+
 const About = () => {
   const [activeTab, setActiveTab] = useState('mission');
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef(null);
 
-  const tabs = {
-    mission: {
-      title: 'Our Mission',
-      content:
-        'At Hitmix, our mission is to be the leading provider of premium-grade bitumen, offering efficient import-export solutions tailored to meet the infrastructure needs of growing economies. We strive to ensure timely deliveries, unmatched quality, and sustainable practices that empower progress around the globe.',
-      src: missionImg,
-    },
-    vision: {
-      title: 'Our Vision',
-      content:
-        'Our vision is to build a future where reliable bitumen supply chains support the growth of modern infrastructure worldwide. We aim to be recognized globally for our integrity, innovation, and impact.',
-      src: missionImg,
-    },
-    team: {
-      title: 'Our Team',
-      content:
-        'Our dedicated team of logistics experts, traders, and engineers bring decades of experience in global trade and road construction materials. With deep industry knowledge and a customer-first mindset, they drive Hitmix toward success and long-term partnerships.',
-      src: missionImg,
-    },
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStatsVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const activeData = tabs.find(t => t.key === activeTab);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white font-sans text-gray-800">
+
       {/* Hero */}
-      <section className="relative h-[60vh] w-full">
-        <img
-          src={AboutImage}
-          alt="Hero"
-          className="w-full h-full object-cover brightness-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col items-center justify-center text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400">About Us</h1>
-          <p className="text-xl mt-4">Empowering Roads, Empowering Progress</p>
-          <p className="max-w-2xl mt-4 text-sm text-gray-200">
-            At Hitmix, we are more than just a supplier of bitumen; we are your dedicated partner
-            in building infrastructure that lasts.
+      <section className="relative h-[65vh] min-h-[420px] w-full overflow-hidden">
+        <img src={AboutImage} alt="About UMA Exports" loading="eager" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <span className="inline-block mb-4 text-xs font-semibold tracking-[0.2em] uppercase text-yellow-400 border border-yellow-400/50 px-4 py-1 rounded-full">
+            Who We Are
+          </span>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight">
+            About <span className="text-yellow-400">Dark Lines RK</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-gray-300 text-base md:text-lg leading-relaxed">
+            More than a supplier — your dedicated partner in building infrastructure that lasts.
           </p>
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="py-20 bg-yellow-300 px-6">
-        <div className="flex justify-center flex-wrap gap-4 mb-10">
-          {Object.keys(tabs).map((key) => (
-            <button
-              key={key}
-              onClick={() => setActiveTab(key)}
-              className={`px-5 py-2 rounded-full font-medium text-sm transition-all ${
-                activeTab === key
-                  ? 'bg-white text-yellow-600 shadow-md'
-                  : 'bg-yellow-200 text-gray-600 hover:bg-white'
-              }`}
-            >
-              {tabs[key].title}
-            </button>
-          ))}
+      {/* Intro Strip */}
+      <section className="bg-yellow-400 py-10 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div>
+            <h2 className="text-2xl font-bold text-black">Empowering Roads, Empowering Progress</h2>
+            <p className="text-black/70 mt-1 text-sm max-w-lg">Over two decades of trusted bitumen supply across India and global markets.</p>
+          </div>
+          <a href="#contact" className="shrink-0 bg-black text-white text-sm font-semibold px-6 py-3 rounded-full hover:bg-gray-900 transition">
+            Get in Touch
+          </a>
         </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden md:flex gap-6 p-8"
-          >
-            <img
-              src={tabs[activeTab].src}
-              alt={tabs[activeTab].title}
-              className="md:w-1/2 w-full h-64 md:h-auto object-cover rounded-xl"
-            />
-            <div className="md:w-1/2 mt-6 md:mt-0 flex flex-col justify-center">
-              <h3 className="text-3xl font-semibold text-yellow-600 mb-4">
-                {tabs[activeTab].title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed">{tabs[activeTab].content}</p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </section>
 
-      {/* Stats Section */}
-      <StatsSection />
+      {/* Tabs */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${
+                  activeTab === tab.key
+                    ? 'bg-yellow-400 text-black border-yellow-400'
+                    : 'bg-white text-gray-500 border-gray-300 hover:border-yellow-400 hover:text-yellow-500'
+                }`}
+              >
+                <span>{tab.icon}</span> {tab.title}
+              </button>
+            ))}
+          </div>
+          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col md:flex-row min-h-[320px] shadow-md">
+            <div className="md:w-5/12 w-full">
+              <img src={missionImg} alt={activeData.title} loading="lazy" className="w-full h-64 md:h-full object-cover" />
+            </div>
+            <div className="md:w-7/12 w-full p-10 flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 text-yellow-500 font-semibold text-sm uppercase tracking-widest mb-4">
+                <span className="w-8 h-0.5 bg-yellow-400 inline-block" />
+                {activeData.title}
+              </div>
+              <h3 className="text-3xl font-bold text-gray-800 mb-5">{activeData.title}</h3>
+              <p className="text-gray-600 leading-relaxed text-base">{activeData.content}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section ref={statsRef} className="py-20 px-6 bg-yellow-400">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-black/60">Our Impact</span>
+            <h2 className="text-4xl font-extrabold text-black mt-2">Dark Lines RK in Numbers</h2>
+            <p className="text-black/60 mt-3 max-w-md mx-auto text-sm">Two decades of operational excellence reflected in real results.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {statsData.map((stat, idx) => (
+              <StatCard key={idx} {...stat} trigger={statsVisible} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-500">Why Us</span>
+            <h2 className="text-4xl font-extrabold text-gray-800 mt-2">Why Choose Dark Lines RK Pvt. Ltd.</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: '🏆', title: 'Premium Quality', desc: 'All materials meet strict international standards with certified quality checks at every stage.' },
+              { icon: '🚚', title: 'Reliable Delivery', desc: 'On-time logistics across India and international markets, backed by a proven supply chain.' },
+              { icon: '🌱', title: 'Sustainable Practices', desc: 'We are committed to eco-friendly operations and responsible sourcing across our supply chain.' },
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md hover:border-yellow-400 transition-all duration-300">
+                <div className="text-4xl mb-5">{item.icon}</div>
+                <h4 className="text-lg font-bold text-gray-800 mb-3">{item.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

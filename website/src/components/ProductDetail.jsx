@@ -78,25 +78,21 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 flex">
-      <div className="w-1/2 pr-4">
-
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-64 h-64 object-cover border-4 border-yellow-500"
-        />
-
-      </div>
-      <div className="w-1/2 pl-4">
-        <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
-        <p className="text-gray-700">{product.description}</p>
-        <button
-          className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
-          onClick={() => navigate('/products')}
-        >
-          BACK TO PRODUCTS
-        </button>
+    <div className="min-h-screen bg-white px-4 py-12">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div className="md:w-1/2">
+          <img src={product.image} alt={product.name} className="w-full h-72 object-cover rounded-xl border-2 border-yellow-400" />
+        </div>
+        <div className="md:w-1/2 flex flex-col justify-center">
+          <h3 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h3>
+          <p className="text-gray-600 leading-relaxed">{product.description}</p>
+          <button
+            className="mt-8 px-6 py-3 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-300 transition w-fit"
+            onClick={() => navigate('/products')}
+          >
+            ← Back to Products
+          </button>
+        </div>
       </div>
     </div>
   );
