@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaBars, FaChevronDown, FaTimes } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
@@ -14,6 +14,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const lastScrollY = useRef(0);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -32,7 +33,18 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdown on outside click
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -43,6 +55,12 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
+  }, [location.pathname]);
+
   const handleCategoryClick = (path) => {
     navigate(path);
     setDropdownOpen(false);
@@ -50,98 +68,240 @@ const Header = () => {
   };
 
   return (
-    <header className={`w-full sticky top-0 z-50 shadow-md transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
-      {/* Top Bar */}
-      <div className="bg-white h-20 text-gray-800 flex flex-col md:flex-row justify-between items-center px-4 py-2 text-sm font-medium">
-        <img src={logo} alt="Dark Lines RK Pvt Ltd" className="h-16 w-auto object-contain" />
-        <div className="flex items-center gap-2">
-          <FaPhoneAlt className="text-yellow-500" />
-          <span>+91 8148913511 | +91 6369656854</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaEnvelope className="text-yellow-500" />
-          <a href="mailto:darklinesrkpvtltd2026@gmail.com" className="hover:underline text-gray-800">
-            darklinesrkpvtltd2026@gmail.com
-          </a>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaMapMarkerAlt className="text-yellow-500" />
-          <span>Manali New Town, Chennai – 600 103</span>
+    <header className={`
+      w-full sticky top-0 z-50 shadow-lg transition-all duration-300 
+      ${visible ? 'translate-y-0' : '-translate-y-full'}
+      bg-white/95 backdrop-blur-md supports-backdrop-blur:bg-white/80
+    `}>
+
+      {/* ── Top contact bar ── */}
+      <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 py-2 sm:py-3">
+            {/* Logo - Responsive sizing */}
+            <div className="flex-shrink-0">
+              <img 
+                src={logo} 
+                alt="Dark Lines RK Pvt Ltd" 
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300" 
+              />
+            </div>
+
+            {/* Contact info — Progressive disclosure based on screen size */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3 lg:gap-4 text-xs sm:text-sm text-gray-600 font-medium">
+              {/* Phone - Always visible on sm+ */}
+              <a 
+                href="tel:+918148913511" 
+                className="hidden sm:flex items-center gap-1.5 hover:text-yellow-600 transition-colors duration-300 group"
+              >
+                <FaPhoneAlt className="text-yellow-500 shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="hidden md:inline">+91 8148913511</span>
+                <span className="md:hidden">Call Us</span>
+              </a>
+              
+              {/* Email - Hidden on mobile, short on tablet, full on desktop */}
+              <a 
+                href="mailto:darklinesrkpvtltd2026@gmail.com" 
+                className="hidden md:flex items-center gap-1.5 hover:text-yellow-600 transition-colors duration-300 group"
+              >
+                <FaEnvelope className="text-yellow-500 shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="hidden lg:inline">darklinesrkpvtltd2026@gmail.com</span>
+                <span className="lg:hidden">Email</span>
+              </a>
+              
+              {/* Location - Only on large screens */}
+              <span className="hidden lg:flex items-center gap-1.5 text-gray-500">
+                <FaMapMarkerAlt className="text-yellow-500 shrink-0" />
+                <span className="hidden xl:inline">Manali New Town, Chennai – 600 103</span>
+                <span className="xl:hidden">Chennai</span>
+              </span>
+            </div>
+
+            {/* Mobile contact button */}
+            <div className="flex sm:hidden items-center gap-2">
+              <a 
+                href="tel:+918148913511"
+                className="flex items-center gap-1 text-xs text-yellow-600 font-semibold hover:text-yellow-700 transition-colors"
+              >
+                <FaPhoneAlt className="text-yellow-500" />
+                Call Now
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Nav */}
-      <nav className="bg-black text-white relative">
-        {/* Mobile top row */}
-        <div className="md:hidden flex justify-between items-center px-4 py-3">
-          <span className="text-lg font-bold text-yellow-500">DARK LINES RK PVT. LTD.</span>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="text-white text-xl">
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
+      {/* ── Navigation bar ── */}
+      <nav className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white shadow-xl">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
 
-        <div className={`${menuOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row md:items-center md:justify-center px-4 md:px-6 py-3 text-sm font-semibold uppercase bg-black`}>
-          <button onClick={() => { navigate('/'); setMenuOpen(false); }}
-            className={`block px-3 py-2 ${isActive('/') ? 'text-yellow-500' : 'hover:text-yellow-500'}`}>
-            Home
-          </button>
-          <button onClick={() => { navigate('/about'); setMenuOpen(false); }}
-            className={`block px-3 py-2 ${isActive('/about') ? 'text-yellow-500' : 'hover:text-yellow-500'}`}>
-            About Us
-          </button>
-
-          {/* Products Dropdown */}
-          <div ref={dropdownRef} className="relative">
+          {/* Mobile: brand + hamburger */}
+          <div className="flex items-center justify-between py-3 md:hidden">
+            <div className="flex flex-col">
+              <span className="text-xs sm:text-sm font-bold text-yellow-400 tracking-wider">DARK LINES RK</span>
+              <span className="text-xs text-gray-400 font-medium">PVT. LTD.</span>
+            </div>
             <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className={`flex items-center gap-1 px-3 py-2 ${isProductsActive ? 'text-yellow-500' : 'hover:text-yellow-500'}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`
+                relative w-8 h-8 flex items-center justify-center rounded-lg
+                transition-all duration-300 transform hover:scale-110
+                ${menuOpen ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white hover:bg-gray-700'}
+              `}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
             >
-              Our Products <FaChevronDown className={`text-xs transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+              <div className="relative">
+                {menuOpen ? (
+                  <FaTimes className="text-lg transition-all duration-300 rotate-180" />
+                ) : (
+                  <FaBars className="text-lg transition-all duration-300" />
+                )}
+              </div>
             </button>
+          </div>
 
-            {/* Dropdown Menu */}
-            {dropdownOpen && (
-              <div className="absolute left-0 top-full mt-1 w-52 bg-white text-gray-800 shadow-xl rounded-lg overflow-hidden z-50">
-                {productCategories.map((cat) => (
+          {/* Desktop nav links */}
+          <div className={`
+            ${menuOpen ? 'flex' : 'hidden'} md:flex
+            flex-col md:flex-row md:items-center md:justify-center
+            gap-0 md:gap-1 lg:gap-2 xl:gap-3
+            pb-4 md:pb-0
+            text-xs sm:text-sm font-semibold uppercase tracking-wider
+            ${menuOpen ? 'animate-slideDown' : ''}
+          `}>
+            <NavBtn label="Home" onClick={() => navigate('/')} active={isActive('/')} isMobile={isMobile} />
+            <NavBtn label="About Us" onClick={() => navigate('/about')} active={isActive('/about')} isMobile={isMobile} />
+
+            {/* Products dropdown */}
+            <div ref={dropdownRef} className="relative group">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onMouseEnter={() => !isMobile && setDropdownOpen(true)}
+                onMouseLeave={() => !isMobile && setTimeout(() => setDropdownOpen(false), 100)}
+                className={`
+                  flex items-center justify-between md:justify-center gap-2
+                  w-full md:w-auto px-3 sm:px-4 py-3 md:py-4 lg:py-5
+                  transition-all duration-300 relative
+                  ${isProductsActive 
+                    ? 'text-yellow-400 bg-yellow-400/10 md:bg-transparent' 
+                    : 'hover:text-yellow-400 hover:bg-yellow-400/5 md:hover:bg-transparent'
+                  }
+                  ${menuOpen ? 'border-l-2 border-yellow-400/30 ml-2 md:ml-0 md:border-0' : ''}
+                `}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                <span>Our Products</span>
+                <FaChevronDown className={`
+                  text-xs transition-all duration-300 
+                  ${dropdownOpen ? 'rotate-180 scale-110' : 'group-hover:scale-110'}
+                `} />
+              </button>
+
+              {/* Desktop dropdown */}
+              <div 
+                className={`
+                  hidden md:block absolute left-1/2 transform -translate-x-1/2 top-full
+                  w-64 lg:w-72 bg-white text-gray-800 
+                  shadow-2xl rounded-xl overflow-hidden z-50 
+                  border border-gray-200 transition-all duration-300
+                  ${dropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
+                `}
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 p-3">
+                  <h3 className="text-sm font-bold text-black">Our Products</h3>
+                </div>
+                {productCategories.map((cat, index) => (
                   <button
                     key={cat.path}
                     onClick={() => handleCategoryClick(cat.path)}
-                    className={`w-full text-left px-4 py-3 text-sm font-medium hover:bg-yellow-400 hover:text-black border-b border-gray-100 last:border-0 transition-colors ${
-                      location.pathname === cat.path ? 'bg-yellow-400 text-black' : ''
-                    }`}
+                    className={`
+                      w-full text-left px-4 py-3 text-sm font-medium 
+                      border-b border-gray-100 last:border-0 
+                      transition-all duration-300 flex items-center gap-3
+                      hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100 
+                      hover:text-yellow-700 hover:translate-x-1
+                      ${location.pathname === cat.path 
+                        ? 'bg-yellow-50 text-yellow-700 border-l-4 border-l-yellow-500' 
+                        : ''
+                      }
+                    `}
                   >
+                    <span className="text-yellow-500 font-bold">{String(index + 1).padStart(2, '0')}</span>
                     {cat.label}
                   </button>
                 ))}
               </div>
-            )}
 
-            {/* Mobile: show inline */}
-            <div className="md:hidden">
-              {productCategories.map((cat) => (
-                <button
-                  key={cat.path}
-                  onClick={() => handleCategoryClick(cat.path)}
-                  className="block w-full text-left px-8 py-2 text-xs text-gray-300 hover:text-yellow-400 uppercase"
-                >
-                  — {cat.label}
-                </button>
-              ))}
+              {/* Mobile: sub-items */}
+              <div className={`
+                md:hidden pl-4 border-l-2 border-yellow-400/30 ml-4 space-y-1
+                ${menuOpen ? 'animate-slideDown' : ''}
+              `}>
+                {productCategories.map((cat, index) => (
+                  <button
+                    key={cat.path}
+                    onClick={() => handleCategoryClick(cat.path)}
+                    className={`
+                      block w-full text-left px-3 py-2 text-xs tracking-wide 
+                      transition-all duration-300 rounded-md
+                      ${location.pathname === cat.path 
+                        ? 'text-yellow-400 bg-yellow-400/10 font-semibold' 
+                        : 'text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/5'
+                      }
+                    `}
+                  >
+                    <span className="text-yellow-500 mr-2">→</span>
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <button onClick={() => { navigate('/exports'); setMenuOpen(false); }}
-            className={`block px-3 py-2 ${isActive('/exports') ? 'text-yellow-500' : 'hover:text-yellow-500'}`}>
-            Exports
-          </button>
-          <button onClick={() => { navigate('/contact'); setMenuOpen(false); }}
-            className={`block px-3 py-2 ${isActive('/contact') ? 'text-yellow-500' : 'hover:text-yellow-500'}`}>
-            Contact Us
-          </button>
+            <NavBtn label="Exports" onClick={() => navigate('/exports')} active={isActive('/exports')} isMobile={isMobile} />
+            <NavBtn label="Contact Us" onClick={() => navigate('/contact')} active={isActive('/contact')} isMobile={isMobile} />
+          </div>
         </div>
       </nav>
     </header>
   );
 };
+
+const NavBtn = ({ label, onClick, active, isMobile }) => (
+  <button
+    onClick={onClick}
+    className={`
+      relative group w-full md:w-auto text-left md:text-center 
+      px-3 sm:px-4 py-3 md:py-4 lg:py-5 
+      transition-all duration-300 font-semibold
+      ${active 
+        ? 'text-yellow-400 bg-yellow-400/10 md:bg-transparent' 
+        : 'hover:text-yellow-400 hover:bg-yellow-400/5 md:hover:bg-transparent'
+      }
+      ${isMobile && !active ? 'border-l-2 border-transparent hover:border-yellow-400/50 ml-2 md:ml-0 md:border-0' : ''}
+      ${active && isMobile ? 'border-l-2 border-yellow-400 ml-2 md:ml-0 md:border-0' : ''}
+    `}
+  >
+    <span className="relative z-10">{label}</span>
+    
+    {/* Desktop underline effect */}
+    <span className={`
+      hidden md:block absolute bottom-0 left-1/2 transform -translate-x-1/2
+      h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500
+      transition-all duration-300 ease-out
+      ${active ? 'w-full' : 'w-0 group-hover:w-full'}
+    `} />
+    
+    {/* Mobile active indicator */}
+    {active && isMobile && (
+      <span className="md:hidden absolute right-2 top-1/2 transform -translate-y-1/2">
+        <span className="text-yellow-400 text-xs">●</span>
+      </span>
+    )}
+  </button>
+);
 
 export default Header;

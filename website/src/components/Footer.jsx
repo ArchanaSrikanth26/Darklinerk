@@ -4,7 +4,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserTie } from 'react-icons/f
 const Footer = () => {
   return (
     <footer className="bg-gray-900 border-t border-yellow-400/20 text-gray-300 py-12">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="container mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-10">
 
         {/* Useful Links */}
         <div>

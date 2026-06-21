@@ -63,7 +63,7 @@ const Carousel = () => {
   }, [current]);
 
   return (
-    <div className="relative w-full h-[85vh] overflow-hidden">
+    <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[85vh] overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -73,11 +73,11 @@ const Carousel = () => {
           style={{ backgroundImage: `url(${slide.image})` }}
         >
           <div className="w-full h-full bg-black bg-opacity-60 flex flex-col justify-center items-center text-center px-4">
-            <h3 className="text-xl md:text-2xl text-yellow-500 mb-2">{slide.title}</h3>
-            <h1 className="text-3xl md:text-6xl font-bold text-white mb-4">
+            <h3 className="text-base sm:text-xl md:text-2xl text-yellow-500 mb-2">{slide.title}</h3>
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 px-2">
               {slide.subtitle}
             </h1>
-            <p className="text-white text-lg md:text-xl mb-6">{slide.description}</p>
+            <p className="text-white text-sm sm:text-base md:text-xl mb-6 px-4">{slide.description}</p>
             <a
               href="#products"
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded transition duration-300"

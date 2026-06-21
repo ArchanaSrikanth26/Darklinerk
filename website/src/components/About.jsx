@@ -61,17 +61,17 @@ const About = () => {
     <div className="bg-white font-sans text-gray-800">
 
       {/* Hero */}
-      <section className="relative h-[65vh] min-h-[420px] w-full overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] min-h-[320px] w-full overflow-hidden">
         <img src={AboutImage} alt="About UMA Exports" loading="eager" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
           <span className="inline-block mb-4 text-xs font-semibold tracking-[0.2em] uppercase text-yellow-400 border border-yellow-400/50 px-4 py-1 rounded-full">
             Who We Are
           </span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
             About <span className="text-yellow-400">Dark Lines RK</span>
           </h1>
-          <p className="mt-5 max-w-xl text-gray-300 text-base md:text-lg leading-relaxed">
+          <p className="mt-4 max-w-xl text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed px-4">
             More than a supplier — your dedicated partner in building infrastructure that lasts.
           </p>
         </div>
@@ -91,9 +91,9 @@ const About = () => {
       </section>
 
       {/* Tabs */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-center gap-3 mb-12 flex-wrap">
+          <div className="flex justify-center gap-2 sm:gap-3 mb-10 sm:mb-12 flex-wrap">
             {tabs.map((tab) => (
               <button
                 key={tab.key}
@@ -108,11 +108,11 @@ const About = () => {
               </button>
             ))}
           </div>
-          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col md:flex-row min-h-[320px] shadow-md">
+          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col md:flex-row min-h-[280px] sm:min-h-[320px] shadow-md">
             <div className="md:w-5/12 w-full">
-              <img src={missionImg} alt={activeData.title} loading="lazy" className="w-full h-64 md:h-full object-cover" />
+              <img src={missionImg} alt={activeData.title} loading="lazy" className="w-full h-52 md:h-full object-cover" />
             </div>
-            <div className="md:w-7/12 w-full p-10 flex flex-col justify-center">
+            <div className="md:w-7/12 w-full p-6 sm:p-10 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 text-yellow-500 font-semibold text-sm uppercase tracking-widest mb-4">
                 <span className="w-8 h-0.5 bg-yellow-400 inline-block" />
                 {activeData.title}
@@ -125,14 +125,14 @@ const About = () => {
       </section>
 
       {/* Stats */}
-      <section ref={statsRef} className="py-20 px-6 bg-yellow-400">
+      <section ref={statsRef} className="py-12 sm:py-20 px-4 sm:px-6 bg-yellow-400">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10 sm:mb-14">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-black/60">Our Impact</span>
-            <h2 className="text-4xl font-extrabold text-black mt-2">Dark Lines RK in Numbers</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-black mt-2">Dark Lines RK in Numbers</h2>
             <p className="text-black/60 mt-3 max-w-md mx-auto text-sm">Two decades of operational excellence reflected in real results.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {statsData.map((stat, idx) => (
               <StatCard key={idx} {...stat} trigger={statsVisible} />
             ))}
@@ -141,13 +141,13 @@ const About = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10 sm:mb-14">
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-500">Why Us</span>
-            <h2 className="text-4xl font-extrabold text-gray-800 mt-2">Why Choose Dark Lines RK Pvt. Ltd.</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mt-2">Why Choose Dark Lines RK Pvt. Ltd.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               { icon: '🏆', title: 'Premium Quality', desc: 'All materials meet strict international standards with certified quality checks at every stage.' },
               { icon: '🚚', title: 'Reliable Delivery', desc: 'On-time logistics across India and international markets, backed by a proven supply chain.' },

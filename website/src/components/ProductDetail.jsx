@@ -78,16 +78,16 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white px-4 py-12">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-        <div className="md:w-1/2">
-          <img src={product.image} alt={product.name} className="w-full h-72 object-cover rounded-xl border-2 border-yellow-400" />
+    <div className="min-h-screen bg-white px-4 py-10 sm:py-12">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-6 sm:gap-10 bg-white border border-gray-200 rounded-2xl p-5 sm:p-8 shadow-sm">
+        <div className="w-full md:w-1/2">
+          <img src={product.image} alt={product.name} className="w-full h-56 sm:h-72 object-cover rounded-xl border-2 border-yellow-400" />
         </div>
-        <div className="md:w-1/2 flex flex-col justify-center">
-          <h3 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h3>
-          <p className="text-gray-600 leading-relaxed">{product.description}</p>
+        <div className="w-full md:w-1/2 flex flex-col justify-center">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">{product.name}</h3>
+          <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{product.description}</p>
           <button
-            className="mt-8 px-6 py-3 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-300 transition w-fit"
+            className="mt-6 sm:mt-8 px-6 py-3 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-300 transition w-fit text-sm sm:text-base"
             onClick={() => navigate('/products')}
           >
             ← Back to Products

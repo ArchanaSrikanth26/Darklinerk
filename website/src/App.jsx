@@ -13,6 +13,7 @@ import Exports from './components/Exports';
 import AgriculturalProducts from './components/AgriculturalProducts';
 import InteriorWorks from './components/InteriorWorks';
 import CivilConstructions from './components/CivilConstructions';
+import ResponsiveDemo from './components/ResponsiveDemo';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/exports" element={<Exports />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/responsive-demo" element={<ResponsiveDemo />} />
         </Routes>
         <Footer />
       </div>

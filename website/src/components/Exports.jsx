@@ -22,14 +22,14 @@ const Exports = () => {
 
       {/* Hero */}
       <section className="relative">
-        <img src={exportImage} alt="Bitumen Export" className="w-full h-[60vh] object-cover brightness-50" />
+        <img src={exportImage} alt="Bitumen Export" className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover brightness-50" />
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">
           <div>
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-400 border border-yellow-400/50 px-4 py-1 rounded-full">
               Global Trade
             </span>
-            <h1 className="text-5xl font-extrabold text-white mt-4">Bitumen <span className="text-yellow-400">Exports</span></h1>
-            <p className="mt-4 text-lg max-w-xl mx-auto text-gray-200">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4">Bitumen <span className="text-yellow-400">Exports</span></h1>
+            <p className="mt-4 text-sm sm:text-base md:text-lg max-w-xl mx-auto text-gray-200 px-4">
               Delivering Premium Bitumen Solutions to Global Markets
             </p>
           </div>
@@ -37,12 +37,12 @@ const Exports = () => {
       </section>
 
       {/* Types of Bitumen */}
-      <section className="py-16 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-8 sm:mb-12">
           <span className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-500">What We Export</span>
-          <h2 className="text-3xl font-bold text-gray-800 mt-2">Types of Bitumen We Export</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">Types of Bitumen We Export</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {exportItems.map((item, idx) => (
             <div key={idx} className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-yellow-400 hover:shadow-md transition-all duration-300">
               <img src={bitumenIcon} alt="Bitumen icon" className="w-12 h-12 mx-auto mb-4 rounded-full object-cover border-2 border-yellow-400" />

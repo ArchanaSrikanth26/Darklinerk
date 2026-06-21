@@ -66,9 +66,9 @@ const Product = () => {
   return (
     <div className="min-h-screen bg-white">
       <Carousel />
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8 sm:mb-10"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

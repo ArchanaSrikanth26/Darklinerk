@@ -3,8 +3,8 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserTie } from 'react-icons/f
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-white px-4 py-12">
-      <div className="max-w-7xl mx-auto space-y-10">
+    <div className="min-h-screen bg-white px-4 py-10 sm:py-12">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
 
         {/* Page Title */}
         <div className="text-center">
@@ -14,7 +14,7 @@ const Contact = () => {
         </div>
 
         {/* Info Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {[
             { Icon: FaPhoneAlt, label: 'Phone', value: '+91 8148913511\n+91 6369656854' },
             { Icon: FaEnvelope, label: 'Email Us', value: 'darklinesrkpvtltd2026@gmail.com' },
@@ -30,8 +30,8 @@ const Contact = () => {
         </div>
 
         {/* Map & Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <div className="w-full h-[400px] rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          <div className="w-full h-[300px] sm:h-[400px] rounded-lg overflow-hidden border border-gray-200 shadow-sm">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5!2d80.2565!3d13.1665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA5JzU5LjciTiA4MMKwMTUnMjMuNCJF!5e0!3m2!1sen!2sin!4v1722807925000"
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
