@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AboutImage from '../assets/images/abtimg.jpg';
 import missionImg from '../assets/images/abt2.jpg';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const statsData = [
   { label: 'MT/Year Material Exported', endValue: 500000, suffix: '+', duration: 2000 },
@@ -38,13 +40,14 @@ const StatCard = ({ label, endValue, suffix, duration, trigger }) => {
 const tabs = [
   { key: 'mission', title: 'Our Mission', icon: '🎯', content: 'At Dark Lines RK Pvt. Ltd., our mission is to be the leading provider of premium-grade bitumen and construction materials, offering efficient solutions tailored to meet the infrastructure needs of growing economies. We ensure timely deliveries, unmatched quality, and sustainable practices that empower progress across India and beyond.' },
   { key: 'vision', title: 'Our Vision', icon: '🌐', content: 'Our vision is to build a future where reliable supply chains support the growth of modern infrastructure. We aim to be recognized across India and globally for our integrity, innovation, and lasting impact on roads, buildings, and civil infrastructure.' },
-  { key: 'team', title: 'Our Team', icon: '🤝', content: 'Led by Director Manikandanraj, our team of civil engineers, logistics experts, and trade specialists bring deep expertise across bitumen supply, agricultural commodities, interior works, and civil construction. We are committed to delivering quality and building long-term partnerships.' },
+  { key: 'team', title: 'Our Team', icon: '🤝', content: 'Led by Director Manikandan Raj, our team of civil engineers, logistics experts, and trade specialists bring deep expertise across bitumen supply, agricultural commodities, interior works, and civil construction. We are committed to delivering quality and building long-term partnerships.' },
 ];
 
 const About = () => {
   const [activeTab, setActiveTab] = useState('mission');
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,6 +68,12 @@ const About = () => {
         <img src={AboutImage} alt="About UMA Exports" loading="eager" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-2 bg-black/40 hover:bg-yellow-400 text-white hover:text-black text-sm font-semibold px-4 py-2 rounded-full transition-all duration-300"
+          >
+            <FaArrowLeft /> Back
+          </button>
           <span className="inline-block mb-4 text-xs font-semibold tracking-[0.2em] uppercase text-yellow-400 border border-yellow-400/50 px-4 py-1 rounded-full">
             Who We Are
           </span>

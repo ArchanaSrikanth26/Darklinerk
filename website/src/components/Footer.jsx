@@ -20,8 +20,13 @@ const Footer = () => {
         <div>
           <h3 className="text-yellow-400 text-lg font-bold mb-4 border-l-4 border-yellow-400 pl-3">Our Products</h3>
           <ul className="space-y-2 text-sm">
-            {['Bitumen Products', 'Agricultural Products', 'Interior Works', 'Civil Constructions'].map(p => (
-              <li key={p} className="hover:text-yellow-400 cursor-pointer transition">+ {p}</li>
+            {[
+              ['Bitumen Products', '/products/bitumen'],
+              ['Agricultural Products', '/products/agricultural'],
+              ['Interior Works', '/products/interior'],
+              ['Civil Constructions', '/products/civil'],
+            ].map(([label, href]) => (
+              <li key={label}><a href={href} className="hover:text-yellow-400 transition">+ {label}</a></li>
             ))}
           </ul>
         </div>
@@ -32,7 +37,7 @@ const Footer = () => {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <FaUserTie className="text-yellow-400 mt-0.5 shrink-0" />
-              <span>Manikandanraj — Director</span>
+              <span>Manikandan Raj — Director</span>
             </li>
             <li className="flex items-start gap-2">
               <FaMapMarkerAlt className="text-yellow-400 mt-0.5 shrink-0" />

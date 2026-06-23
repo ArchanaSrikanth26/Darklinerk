@@ -19,7 +19,7 @@ const Contact = () => {
             { Icon: FaPhoneAlt, label: 'Phone', value: '+91 8148913511\n+91 6369656854' },
             { Icon: FaEnvelope, label: 'Email Us', value: 'darklinesrkpvtltd2026@gmail.com' },
             { Icon: FaMapMarkerAlt, label: 'Address', value: 'No.1/182, Phase-2, Sadayankuppam Village, Manali New Town, Chennai – 600 103' },
-            { Icon: FaUserTie, label: 'Director', value: 'Manikandanraj' },
+            { Icon: FaUserTie, label: 'Director', value: 'Manikandan Raj' },
           ].map((item, i) => (
             <div key={i} className="bg-white p-6 text-center border border-gray-200 shadow-sm rounded-lg hover:border-yellow-400 hover:shadow-md transition">
               <item.Icon className="text-yellow-500 text-3xl mx-auto mb-3" />

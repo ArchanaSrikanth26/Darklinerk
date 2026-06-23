@@ -15,10 +15,13 @@ import InteriorWorks from './components/InteriorWorks';
 import CivilConstructions from './components/CivilConstructions';
 import ResponsiveDemo from './components/ResponsiveDemo';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path="/" element={<><VideoCarousel /><LandingPage /></>} />

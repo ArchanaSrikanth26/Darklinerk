@@ -178,7 +178,6 @@ const Header = () => {
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 onMouseEnter={() => !isMobile && setDropdownOpen(true)}
-                onMouseLeave={() => !isMobile && setTimeout(() => setDropdownOpen(false), 100)}
                 className={`
                   flex items-center justify-between md:justify-center gap-2
                   w-full md:w-auto px-3 sm:px-4 py-3 md:py-4 lg:py-5
@@ -209,7 +208,7 @@ const Header = () => {
                   ${dropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
                 `}
                 onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
+                onMouseLeave={() => setTimeout(() => setDropdownOpen(false), 150)}
               >
                 <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 p-3">
                   <h3 className="text-sm font-bold text-black">Our Products</h3>
