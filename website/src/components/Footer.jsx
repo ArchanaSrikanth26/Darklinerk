@@ -41,7 +41,7 @@ const Footer = () => {
             </li>
             <li className="flex items-start gap-2">
               <FaMapMarkerAlt className="text-yellow-400 mt-0.5 shrink-0" />
-              <span>No.1/182, Phase-2, Sadayankuppam Village,<br />Manali New Town, Chennai – 600 103</span>
+              <span>No.1/182, Phase-2, Sadayankuppam Village, Manali New Town, Chennai – 600 103</span>
             </li>
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-yellow-400 shrink-0" />

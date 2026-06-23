@@ -11,9 +11,9 @@ const LandingPage = () => {
     <div className="bg-white">
 
       {/* Meet Our Director */}
-      <section className="py-12 sm:py-16 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <section className="py-8 sm:py-14 bg-gradient-to-br from-gray-50 via-white to-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6 sm:mb-10">
             <div className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider mb-3">
               <FaUserTie className="text-yellow-500" />
               Leadership
@@ -23,18 +23,18 @@ const LandingPage = () => {
           </div>
 
           <div className="flex justify-center">
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl hover:border-yellow-400 transition-all duration-300 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 max-w-2xl w-full">
-              <div className="relative shrink-0">
-                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
+            <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl hover:border-yellow-400 transition-all duration-300 p-5 sm:p-8 flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-2xl w-full">
+              <div className="relative shrink-0 pb-4">
+                <div className="w-28 h-28 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
                   <img src={maniImg} alt="Manikandan Raj" className="w-full h-full object-cover" />
                 </div>
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap shadow">Director</span>
+                <span className="absolute -bottom-0 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap shadow">Director</span>
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-800">Manikandan Raj</h3>
+                <h3 className="text-xl sm:text-3xl font-extrabold text-gray-800">Manikandan Raj</h3>
                 <p className="text-yellow-600 font-semibold text-sm mt-1 mb-3">Founder & Director, Dark Lines RK Pvt. Ltd.</p>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                  With over two decades of experience in bitumen supply, agricultural commodities, and civil infrastructure, Manikandan Raj has led Dark Lines RK Pvt. Ltd. to become a trusted name across India and global markets. His vision drives the company's commitment to quality, reliability, and sustainable growth.
+                  With over two decades of experience in bitumen supply, agricultural commodities, and civil infrastructure, Manikandan Raj has led Dark Lines RK Pvt. Ltd. to become a trusted name across India and global markets.
                 </p>
               </div>
             </div>
@@ -275,23 +275,7 @@ const LandingPage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12 lg:mt-16 opacity-0 translate-y-4 animate-fade-in" style={{animationDelay: '0.6s'}}>
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:border-yellow-400/50 hover:-translate-y-1 transition-all duration-300 ease-out p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Need a Custom Solution?</h3>
-              <p className="text-gray-600 text-base sm:text-lg mb-6 leading-relaxed">
-                Contact our experts for tailored bitumen products that meet your specific requirements and project needs.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-semibold text-sm sm:text-base rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 ease-out focus:ring-4 focus:ring-yellow-400 focus:ring-opacity-50">
-                  <FaPhone />
-                  <span>Contact Expert</span>
-                </button>
-                <button className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 bg-white border-2 border-gray-300 text-gray-700 font-semibold text-sm sm:text-base rounded-lg shadow-sm hover:shadow-md hover:border-yellow-400 hover:text-yellow-600 transform hover:scale-105 active:scale-95 transition-all duration-300 ease-out">
-                  View All Products
-                </button>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </section>
 

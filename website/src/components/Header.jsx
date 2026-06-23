@@ -77,55 +77,48 @@ const Header = () => {
       {/* ── Top contact bar ── */}
       <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 py-2 sm:py-3">
-            {/* Logo - Responsive sizing */}
+          <div className="flex flex-row items-center justify-between py-2 sm:py-3">
+            {/* Logo */}
             <div className="flex-shrink-0">
-              <img 
-                src={logo} 
-                alt="Dark Lines RK Pvt Ltd" 
-                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300" 
+              <img
+                src={logo}
+                alt="Dark Lines RK Pvt Ltd"
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300"
               />
             </div>
 
-            {/* Contact info — Progressive disclosure based on screen size */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3 lg:gap-4 text-xs sm:text-sm text-gray-600 font-medium">
-              {/* Phone - Always visible on sm+ */}
-              <a 
-                href="tel:+918148913511" 
+            {/* Contact info — right side */}
+            <div className="flex flex-row items-center gap-3 lg:gap-4 text-xs sm:text-sm text-gray-600 font-medium">
+              {/* Mobile: show call button inline with logo */}
+              <a
+                href="tel:+918148913511"
+                className="flex sm:hidden items-center gap-1 text-xs text-yellow-600 font-semibold hover:text-yellow-700 transition-colors"
+              >
+                <FaPhoneAlt className="text-yellow-500" />
+                Call Now
+              </a>
+              {/* sm+: show full phone */}
+              <a
+                href="tel:+918148913511"
                 className="hidden sm:flex items-center gap-1.5 hover:text-yellow-600 transition-colors duration-300 group"
               >
                 <FaPhoneAlt className="text-yellow-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <span className="hidden md:inline">+91 8148913511</span>
                 <span className="md:hidden">Call Us</span>
               </a>
-              
-              {/* Email - Hidden on mobile, short on tablet, full on desktop */}
-              <a 
-                href="mailto:darklinesrkpvtltd2026@gmail.com" 
+              <a
+                href="mailto:darklinesrkpvtltd2026@gmail.com"
                 className="hidden md:flex items-center gap-1.5 hover:text-yellow-600 transition-colors duration-300 group"
               >
                 <FaEnvelope className="text-yellow-500 shrink-0 group-hover:scale-110 transition-transform" />
                 <span className="hidden lg:inline">darklinesrkpvtltd2026@gmail.com</span>
                 <span className="lg:hidden">Email</span>
               </a>
-              
-              {/* Location - Only on large screens */}
               <span className="hidden lg:flex items-center gap-1.5 text-gray-500">
                 <FaMapMarkerAlt className="text-yellow-500 shrink-0" />
                 <span className="hidden xl:inline">Manali New Town, Chennai – 600 103</span>
                 <span className="xl:hidden">Chennai</span>
               </span>
-            </div>
-
-            {/* Mobile contact button */}
-            <div className="flex sm:hidden items-center gap-2">
-              <a 
-                href="tel:+918148913511"
-                className="flex items-center gap-1 text-xs text-yellow-600 font-semibold hover:text-yellow-700 transition-colors"
-              >
-                <FaPhoneAlt className="text-yellow-500" />
-                Call Now
-              </a>
             </div>
           </div>
         </div>
