@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from './Carousel';
 import aboutImage from '../assets/images/logo.png';
 import maniImg from '../assets/images/mani.jpg';
 import { FaCheck, FaGlobe, FaShoppingCart, FaPhone, FaArrowRight, FaUserTie } from 'react-icons/fa';

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import AboutImage from '../assets/images/abtimg.jpg';
 import missionImg from '../assets/images/abt2.jpg';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaBullseye, FaGlobeAsia, FaUsers, FaTrophy, FaTruck, FaLeaf } from 'react-icons/fa';
 
 const statsData = [
   { label: 'MT/Year Material Exported', endValue: 500000, suffix: '+', duration: 2000 },
@@ -38,9 +38,9 @@ const StatCard = ({ label, endValue, suffix, duration, trigger }) => {
 };
 
 const tabs = [
-  { key: 'mission', title: 'Our Mission', icon: '🎯', content: 'At Dark Lines RK Pvt. Ltd., our mission is to be the leading provider of premium-grade bitumen and construction materials, offering efficient solutions tailored to meet the infrastructure needs of growing economies. We ensure timely deliveries, unmatched quality, and sustainable practices that empower progress across India and beyond.' },
-  { key: 'vision', title: 'Our Vision', icon: '🌐', content: 'Our vision is to build a future where reliable supply chains support the growth of modern infrastructure. We aim to be recognized across India and globally for our integrity, innovation, and lasting impact on roads, buildings, and civil infrastructure.' },
-  { key: 'team', title: 'Our Team', icon: '🤝', content: 'Led by Director Manikandan Raj, our team of civil engineers, logistics experts, and trade specialists bring deep expertise across bitumen supply, agricultural commodities, interior works, and civil construction. We are committed to delivering quality and building long-term partnerships.' },
+  { key: 'mission', title: 'Our Mission', icon: <FaBullseye className="text-base" />, content: 'At Dark Lines RK Pvt. Ltd., our mission is to be the leading provider of premium-grade bitumen and construction materials, offering efficient solutions tailored to meet the infrastructure needs of growing economies. We ensure timely deliveries, unmatched quality, and sustainable practices that empower progress across India and beyond.' },
+  { key: 'vision', title: 'Our Vision', icon: <FaGlobeAsia className="text-base" />, content: 'Our vision is to build a future where reliable supply chains support the growth of modern infrastructure. We aim to be recognized across India and globally for our integrity, innovation, and lasting impact on roads, buildings, and civil infrastructure.' },
+  { key: 'team', title: 'Our Team', icon: <FaUsers className="text-base" />, content: 'Led by Director Manikandan Raj, our team of civil engineers, logistics experts, and trade specialists bring deep expertise across bitumen supply, agricultural commodities, interior works, and civil construction. We are committed to delivering quality and building long-term partnerships.' },
 ];
 
 const About = () => {
@@ -93,7 +93,7 @@ const About = () => {
             <h2 className="text-2xl font-bold text-black">Empowering Roads, Empowering Progress</h2>
             <p className="text-black/70 mt-1 text-sm max-w-lg">Over two decades of trusted bitumen supply across India and global markets.</p>
           </div>
-          <a href="#contact" className="shrink-0 bg-black text-white text-sm font-semibold px-6 py-3 rounded-full hover:bg-gray-900 transition">
+          <a href="/contact" className="shrink-0 bg-black text-white text-sm font-semibold px-6 py-3 rounded-full hover:bg-gray-900 transition">
             Get in Touch
           </a>
         </div>
@@ -158,12 +158,12 @@ const About = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              { icon: '🏆', title: 'Premium Quality', desc: 'All materials meet strict international standards with certified quality checks at every stage.' },
-              { icon: '🚚', title: 'Reliable Delivery', desc: 'On-time logistics across India and international markets, backed by a proven supply chain.' },
-              { icon: '🌱', title: 'Sustainable Practices', desc: 'We are committed to eco-friendly operations and responsible sourcing across our supply chain.' },
+              { icon: <FaTrophy className="text-yellow-500 text-3xl" />, title: 'Premium Quality', desc: 'All materials meet strict international standards with certified quality checks at every stage.' },
+              { icon: <FaTruck className="text-yellow-500 text-3xl" />, title: 'Reliable Delivery', desc: 'On-time logistics across India and international markets, backed by a proven supply chain.' },
+              { icon: <FaLeaf className="text-yellow-500 text-3xl" />, title: 'Sustainable Practices', desc: 'We are committed to eco-friendly operations and responsible sourcing across our supply chain.' },
             ].map((item, idx) => (
               <div key={idx} className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md hover:border-yellow-400 transition-all duration-300">
-                <div className="text-4xl mb-5">{item.icon}</div>
+                <div className="mb-5">{item.icon}</div>
                 <h4 className="text-lg font-bold text-gray-800 mb-3">{item.title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FaGlobeAsia, FaIndustry, FaTruck, FaCheckCircle, FaPhoneAlt,
-  FaArrowRight, FaShip, FaBoxOpen, FaFileAlt, FaStar, FaHandshake
+  FaArrowRight, FaShip, FaBoxOpen, FaFileAlt, FaStar, FaHandshake,
+  FaRoad, FaFlask, FaWater, FaChartBar, FaCut ,FaMicroscope 
 } from 'react-icons/fa';
 import heroImg from '../assets/images/road2.jpg';
 import img1 from '../assets/images/tar.jpg';
@@ -14,42 +15,42 @@ const exportProducts = [
   {
     title: 'Road Grade Bitumen',
     grade: 'VG-10, VG-30, VG-40',
-    icon: '🛣️',
+    icon: <FaRoad className="text-yellow-500 text-2xl" />,
     desc: 'Premium viscosity grade bitumen for highway and urban road construction. Consistent quality backed by BIS certification and tested to IS 73 standards.',
     markets: ['UAE', 'Sri Lanka', 'Bangladesh'],
   },
   {
     title: 'Polymer Modified Bitumen',
     grade: 'SBS / APP Modified',
-    icon: '⚗️',
+    icon: <FaFlask className="text-yellow-500 text-2xl" />,
     desc: 'High-performance bitumen enhanced with SBS or APP polymers for superior elasticity, rutting resistance, and extended pavement life in extreme conditions.',
     markets: ['Malaysia', 'Singapore', 'Russia'],
   },
   {
     title: 'Bitumen Emulsions',
     grade: 'CSS / CRS / CQS',
-    icon: '💧',
+    icon: <FaWater className="text-yellow-500 text-2xl" />,
     desc: 'Cationic and anionic emulsions for eco-friendly road maintenance, surface dressing, tack coats, and cold mix asphalt — no heating required.',
     markets: ['Afghanistan', 'Djibouti', 'Benin'],
   },
   {
     title: 'Industrial Mastic Bitumen',
     grade: 'IS 702 Grade',
-    icon: '🏭',
+    icon: <FaIndustry className="text-yellow-500 text-2xl" />,
     desc: 'Heavy-duty semi-solid bitumen for waterproofing, roofing, tank linings, and industrial sealing. Resistant to chemicals, moisture, and temperature extremes.',
     markets: ['UAE', 'Singapore', 'Malaysia'],
   },
   {
     title: 'Penetration Grade Bitumen',
     grade: '60/70 · 80/100',
-    icon: '📊',
+    icon: <FaChartBar className="text-yellow-500 text-2xl" />,
     desc: 'Globally traded bitumen grade classified by hardness. Used in asphalt paving, road base construction, and general-purpose civil infrastructure worldwide.',
     markets: ['Russia', 'Sri Lanka', 'Bangladesh'],
   },
   {
     title: 'Cut Back Bitumen',
     grade: 'RC / MC / SC',
-    icon: '🔬',
+    icon: <FaMicroscope  className="text-yellow-500 text-2xl" />,
     desc: 'Solvent-blended bitumen for low-temperature application. Ideal for prime coats, tack coats, and surface dressing in cold or remote regions.',
     markets: ['Afghanistan', 'Djibouti', 'Benin'],
   },
