@@ -16,7 +16,7 @@ const Contact = () => {
         {/* Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {[
-            { Icon: FaPhoneAlt, label: 'Phone', value: '+91 8148913511\n+91 6369656854' },
+            { Icon: FaPhoneAlt, label: 'Phone', value: '+91 8148913511\n+91 90435 22639' },
             { Icon: FaEnvelope, label: 'Email Us', value: 'darklinesrkpvtltd2026@gmail.com' },
             { Icon: FaMapMarkerAlt, label: 'Address', value: 'No.1/182, Phase-2, Sadayankuppam Village, Manali New Town, Chennai – 600 103' },
             { Icon: FaUserTie, label: 'Director', value: 'Manikandan Raj' },
